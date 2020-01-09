@@ -1,0 +1,592 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{DIP-HW12}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{digital-image-processing---hw12---98722278---mohammad-doosti-lakhani}{%
+\section{Digital Image Processing - HW12 - 98722278 - Mohammad Doosti
+Lakhani}\label{digital-image-processing---hw12---98722278---mohammad-doosti-lakhani}}
+
+In this notebook, I have solved the assignment's problems which are as
+follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Consider SSD300 and VGG16 models and answer following questions:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    What is the number of parameters in SSD300, number of multiplication
+    and addition operations
+  \item
+    If we extract 2000 candidate regions from the input image and use
+    VGG16 for classification, what is the number of Number of parameters
+    in SSD300, number of multiplication and addition operations
+  \item
+    Compare results
+  \end{enumerate}
+\item
+  \texttt{ground-truth.xlsx} and \texttt{detections.xlsx} files
+  demonstrate ground truth and detected anchors respectively. Calculate
+  \texttt{AP25} and \texttt{AP50}.
+\item
+  Train a model similar to SSD300 for object detection. \emph{{[}THIS
+  PART HAS BEEN IMPLEMENTED IN SEPARATE NOTEBOOK{]}}
+\end{enumerate}
+
+    \hypertarget{consider-ssd300-and-vgg16-models-and-answer-following-questions}{%
+\subsection{1 Consider SSD300 and VGG16 models and answer following
+questions:}\label{consider-ssd300-and-vgg16-models-and-answer-following-questions}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is the number of parameters in SSD300, number of multiplication
+  and addition operations
+\item
+  If we extract 2000 candidate regions from the input image and use
+  VGG16 for classification, what is the number of Number of parameters
+  in SSD300, number of multiplication and addition operations
+\item
+  Compare results
+\end{enumerate}
+
+    \hypertarget{a-params-and-mac-in-ssd300}{%
+\subsubsection{1.A Params and MAC in
+SSD300}\label{a-params-and-mac-in-ssd300}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Layer Name & \# Params & MAC\tabularnewline
+\midrule
+\endhead
+conv1\_1 & 1792 & 155520000\tabularnewline
+conv1\_2 & 36928 & 3317760000\tabularnewline
+conv2\_1 & 73856 & 1658880000\tabularnewline
+conv2\_2 & 147584 & 3317760000\tabularnewline
+conv3\_1 & 295168 & 1658880000\tabularnewline
+conv3\_2 & 590080 & 3317760000\tabularnewline
+conv3\_3 & 590080 & 3317760000\tabularnewline
+conv4\_1 & 1180160 & 1703411712\tabularnewline
+conv4\_2 & 2359808 & 3406823424\tabularnewline
+conv4\_3 & 2359808 & 3406823424\tabularnewline
+conv4\_3\_norm & 2 & 739328\tabularnewline
+conv4\_3\_norm\_conf & 387156 & 558931968\tabularnewline
+conv4\_3\_norm\_loc & 73744 & 106463232\tabularnewline
+conv5\_1 & 2359808 & 851705856\tabularnewline
+conv5\_2 & 2359808 & 851705856\tabularnewline
+conv5\_3 & 2359808 & 851705856\tabularnewline
+fc6 & 4719616 & 1703411712\tabularnewline
+fc7 & 1049600 & 378535936\tabularnewline
+fc7\_conf & 1161342 & 419198976\tabularnewline
+fc7\_loc & 221208 & 79847424\tabularnewline
+conv6\_1 & 262400 & 94633984\tabularnewline
+conv6\_2 & 1180160 & 117964800\tabularnewline
+conv6\_2\_conf & 580734 & 58060800\tabularnewline
+conv6\_2\_loc & 110616 & 11059200\tabularnewline
+conv7\_1 & 65664 & 6553600\tabularnewline
+conv7\_2 & 295168 & 7372800\tabularnewline
+conv7\_2\_conf & 290430 & 7257600\tabularnewline
+conv7\_2\_loc & 55320 & 1382400\tabularnewline
+conv8\_1 & 32896 & 819200\tabularnewline
+conv8\_2 & 295168 & 2654208\tabularnewline
+conv8\_2\_conf & 193620 & 1741824\tabularnewline
+conv8\_2\_loc & 36880 & 331776\tabularnewline
+conv9\_1 & 32896 & 294912\tabularnewline
+conv9\_2 & 295168 & 294912\tabularnewline
+conv9\_2\_conf & 193620 & 193536\tabularnewline
+conv9\_2\_loc & 36880 & 36864\tabularnewline
+\bottomrule
+\end{longtable}
+
+\texttt{Total\ Params\ =\ 26284974} \texttt{Total\ MACs\ =\ 31374277120}
+
+Note: For naming convention, please see
+\href{https://github.com/weiliu89/caffe/tree/ssd}{official SSD300 Caffe
+implementation} or mine as separate file \texttt{DIP-HW12-Task3}.
+
+    \hypertarget{b-params-and-mac-in-vgg16-for-2000-candidates}{%
+\subsubsection{1.B Params and MAC in VGG16 for 2000
+Candidates}\label{b-params-and-mac-in-vgg16-for-2000-candidates}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Layer Name & \# Params & MAC\tabularnewline
+\midrule
+\endhead
+conv1\_1 & 1792 & 86704128\tabularnewline
+conv1\_2 & 36928 & 1849688064\tabularnewline
+conv2\_1 & 73856 & 924844032\tabularnewline
+conv2\_2 & 147584 & 1849688064\tabularnewline
+conv3\_1 & 295168 & 924844032\tabularnewline
+conv3\_2 & 590080 & 1849688064\tabularnewline
+conv3\_3 & 590080 & 1849688064\tabularnewline
+conv4\_1 & 1180160 & 924844032\tabularnewline
+conv4\_2 & 2359808 & 1849688064\tabularnewline
+conv4\_3 & 2359808 & 1849688064\tabularnewline
+conv5\_1 & 2359808 & 462422016\tabularnewline
+conv5\_2 & 2359808 & 462422016\tabularnewline
+conv5\_3 & 2359808 & 462422016\tabularnewline
+fc6 & 102764544 & 102760448\tabularnewline
+fc7 & 16781312 & 16777216\tabularnewline
+fc8 & 4097000 & 4096000\tabularnewline
+\bottomrule
+\end{longtable}
+
+\texttt{Total\ Params\ for\ SINGLE\ VGG16\ RUN\ =\ 138357544}
+\texttt{Total\ MACs\ for\ SINGLE\ VGG16\ RUN\ =\ 15470264320}
+
+\texttt{Total\ Params\ for\ 2000\ VGG16\ RUN\ =\ 138357544}
+\texttt{Total\ MACs\ for\ 2000\ VGG16\ RUN\ =\ 30940528640000}
+
+    \hypertarget{c-compare-results}{%
+\subsubsection{1.C Compare Results}\label{c-compare-results}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Model Name & \# Params & MAC\tabularnewline
+\midrule
+\endhead
+VGG16-2000 & 138357544 & 30940528640000\tabularnewline
+VGG16 & 138357544 & 15470264320\tabularnewline
+SSD300 & 26284974 & 31374277120\tabularnewline
+\bottomrule
+\end{longtable}
+
+As we can see, even though SSD has VGG in itself plus much more conv
+layers across the network, it has much less parameters because of
+omitting fully connected layers and replacing them with conv layers
+where the ratio is about \texttt{5.26}, so SSD300 is fifth of VGG16.
+
+About number of multiplications and additions for SINGLE run of VGG16,
+we need about \texttt{0.493} ratio of this amount in SSD300 so still
+even SSD300 is much bigger in term of number of layers, it reasonable
+number of m-a operations but this time number of operations cannot be
+reduced by using conv layers instead of fc layers as we can see the
+number of operations layer by layer in above sections.
+
+But as we want to run VGG16 for 2000 candidate regions, we need about
+\texttt{9.861} times more m-a operations in VGG16 w.r.t. SSD300 which
+has immeensly increased and this is the main reason that networks like
+RCNN are very slow and fail to operate in real time tasks.
+
+    \hypertarget{ap25-and-ap50-for-ground-truth.xlsx-and-detections.xlsx}{%
+\subsection{\texorpdfstring{2. \texttt{AP25} and \texttt{AP50} for
+\texttt{ground-truth.xlsx} and
+\texttt{detections.xlsx}}{2. AP25 and AP50 for ground-truth.xlsx and detections.xlsx}}\label{ap25-and-ap50-for-ground-truth.xlsx-and-detections.xlsx}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{pred} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pred.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{pred}\PY{p}{)}
+         \PY{n}{pred} \PY{o}{=} \PY{n}{pred}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     x    y   w   h  score
+3  114   31  14  21   0.96
+2   55   72  34  36   0.89
+0   11    5  19  26   0.84
+1   18   39  31  23   0.79
+6  124  136  29  35   0.74
+4   24   98  21  34   0.47
+5   36  150  41  26   0.39
+7   92  153  27  47   0.29
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n}{gt} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gt.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{gt}\PY{p}{)}
+         \PY{n}{gt} \PY{o}{=} \PY{n}{gt}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     x    y   w   h
+0  153   21  20  25
+1  116   30  13  23
+2  125  135  30  35
+3   30  160  30  20
+4   10    5  20  25
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{threshold} \PY{o}{=} \PY{l+m+mf}{0.25}
+         \PY{n}{ious} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pred}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{gt}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{xmin\PYZus{}max} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ymin\PYZus{}max} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{xmax\PYZus{}min} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{p}{(}\PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{ymax\PYZus{}min} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{p}{(}\PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{intersection\PYZus{}area} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{xmax\PYZus{}min} \PY{o}{\PYZhy{}} \PY{n}{xmin\PYZus{}max} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n+nb}{max}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ymax\PYZus{}min} \PY{o}{\PYZhy{}} \PY{n}{ymin\PYZus{}max} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{gt\PYZus{}area} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{gt}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{pred\PYZus{}area} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{union\PYZus{}area} \PY{o}{=} \PY{n}{gt\PYZus{}area} \PY{o}{+} \PY{n}{pred\PYZus{}area} \PY{o}{\PYZhy{}} \PY{n}{intersection\PYZus{}area}
+                 \PY{n}{iou} \PY{o}{=} \PY{n}{intersection\PYZus{}area} \PY{o}{/} \PY{n}{union\PYZus{}area}
+                 \PY{n}{ious}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{iou}\PY{p}{)}
+         \PY{n}{ious} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{ious}\PY{p}{)}
+         \PY{n}{tp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{p}{(}\PY{n}{ious} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{)}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{fn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{gt}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{tp}
+         \PY{n}{fp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pred}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{tp}
+         \PY{n}{precision} \PY{o}{=} \PY{n}{tp}\PY{o}{/}\PY{p}{(}\PY{n}{tp}\PY{o}{+}\PY{n}{fp}\PY{p}{)}
+         \PY{n}{recall} \PY{o}{=} \PY{n}{tp}\PY{o}{/}\PY{p}{(}\PY{n}{tp}\PY{o}{+}\PY{n}{fn}\PY{p}{)}
+         
+         \PY{n}{pr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{recall\PYZus{}level} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{recall} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{recall\PYZus{}level}\PY{p}{:}
+                 \PY{n}{pr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{precision}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{pr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{avg\PYZus{}pr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{pr}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AP is }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{avg\PYZus{}pr}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mAP is }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{avg\PYZus{}pr}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} please read blow section}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+AP is  0.409090909091
+mAP is  0.409090909091
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{mAP50}:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    \texttt{AP\ is\ \ 0.204545454545}
+  \item
+    \texttt{mAP\ is\ \ 0.204545454545}
+  \end{enumerate}
+\item
+  \texttt{mAP25}:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    \texttt{AP\ is\ \ 0.409090909091}
+  \item
+    \texttt{mAP\ is\ \ 0.409090909091}
+  \end{enumerate}
+\end{enumerate}
+
+    In the given assignment for task 2: 1. it has been said that these
+prediction and ground truth coordinates are for a SINGLE image. 2. the
+type of objects in this single image has not been declared so I
+considered it SINGLE TYPE OBJECT multiple instance mode.
+
+Based on the reason 1, \texttt{mAP\ =\ mP} as there is only one image so
+average over all precision and recalls are the precision and recall of
+the single image.
+
+Based on the reason 2, \texttt{mAP\ =\ AP} as there is only one object
+so \texttt{m} which stands for multi class objects for averaging is
+still one single number as there is only 1 object but multiple instance
+of it.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
