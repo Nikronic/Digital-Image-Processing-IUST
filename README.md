@@ -4,4 +4,6 @@ The assignments of Digital Image Processing course taught by [Dr. Mohammadi](htt
 # BASIC HOW TO:
 EACH FOLDER HAS ITS OWN "README" ABOUT OUTLINES, QUESTIONS AND THE SOLUTION PLUS EXPLANATIONS AND VISUALIZATIONS (SCROLL DOWN PLEASE).
 
+PS. Commits are not atomic!
+
 Happy Coding!
